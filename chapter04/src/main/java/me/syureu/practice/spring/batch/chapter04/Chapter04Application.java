@@ -1,11 +1,13 @@
 package me.syureu.practice.spring.batch.chapter04;
 
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParametersValidator;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.job.DefaultJobParametersValidator;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +28,16 @@ public class Chapter04Application {
     }
 
     @Bean
+    public JobParametersValidator validator() {
+        DefaultJobParametersValidator validator = new DefaultJobParametersValidator();
+
+        validator.setRequiredKeys(new String[]{"fileName"});
+        validator.setOptionalKeys(new String[]{"name"});
+
+        return validator;
+    }
+
+    @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
                 .tasklet(helloWorldTaskLet(null))
@@ -36,7 +48,7 @@ public class Chapter04Application {
     public Job job() {
         return this.jobBuilderFactory.get("basicJob")
                 .start(step1())
-                .validator(new ParameterValidator())
+                .validator(validator())
                 .build();
     }
 
