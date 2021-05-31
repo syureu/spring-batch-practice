@@ -36,6 +36,7 @@ public class Chapter04Application {
     public Job job() {
         return this.jobBuilderFactory.get("basicJob")
                 .start(step1())
+                .validator(new ParameterValidator())
                 .build();
     }
 
