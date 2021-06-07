@@ -3,6 +3,7 @@ package me.syureu.practice.spring.batch.chapter04;
 import me.syureu.practice.spring.batch.chapter04.joblistener.JobLoggerListener;
 import me.syureu.practice.spring.batch.chapter04.joblistener.JobLoggerListener2;
 import me.syureu.practice.spring.batch.chapter04.jobparameter.DailyJobTimeStamper;
+import me.syureu.practice.spring.batch.chapter04.tasklet.HelloWorld;
 import me.syureu.practice.spring.batch.chapter04.validator.ParameterValidator;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -50,7 +51,8 @@ public class Chapter04Application {
     @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .tasklet(helloWorldTaskLet(null, null, null, null))
+//                .tasklet(helloWorldTaskLet(null, null, null, null))
+                .tasklet(new HelloWorld())
                 .build();
     }
 
