@@ -1,4 +1,4 @@
-package me.syureu.practice.spring.batch.chapter04;
+package me.syureu.practice.spring.batch.chapter04.validator;
 
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
