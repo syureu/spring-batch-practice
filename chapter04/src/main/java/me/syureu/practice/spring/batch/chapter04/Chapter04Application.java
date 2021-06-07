@@ -1,6 +1,7 @@
 package me.syureu.practice.spring.batch.chapter04;
 
 import me.syureu.practice.spring.batch.chapter04.joblistener.JobLoggerListener;
+import me.syureu.practice.spring.batch.chapter04.joblistener.JobLoggerListener2;
 import me.syureu.practice.spring.batch.chapter04.jobparameter.DailyJobTimeStamper;
 import me.syureu.practice.spring.batch.chapter04.validator.ParameterValidator;
 import org.springframework.batch.core.Job;
@@ -11,6 +12,7 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.CompositeJobParametersValidator;
 import org.springframework.batch.core.job.DefaultJobParametersValidator;
+import org.springframework.batch.core.listener.JobListenerFactoryBean;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,7 +60,7 @@ public class Chapter04Application {
                 .start(step1())
                 .validator(validator())
                 .incrementer(new DailyJobTimeStamper())
-                .listener(new JobLoggerListener())
+                .listener(JobListenerFactoryBean.getListener(new JobLoggerListener2()))
                 .build();
     }
 
