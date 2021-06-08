@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 
-@EnableBatchProcessing
+//@EnableBatchProcessing
 @SpringBootApplication
 public class Chapter04Application {
 
@@ -37,7 +37,7 @@ public class Chapter04Application {
         this.stepBuilderFactory = stepBuilderFactory;
     }
 
-    @Bean
+    //@Bean
     public CompositeJobParametersValidator validator() {
         CompositeJobParametersValidator validator = new CompositeJobParametersValidator();
 
@@ -48,7 +48,7 @@ public class Chapter04Application {
         return validator;
     }
 
-    @Bean
+    //@Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
 //                .tasklet(helloWorldTaskLet(null, null, null, null))
@@ -56,7 +56,7 @@ public class Chapter04Application {
                 .build();
     }
 
-    @Bean
+    //@Bean
     public Job job() {
         return this.jobBuilderFactory.get("basicJob")
                 .start(step1())
@@ -66,8 +66,8 @@ public class Chapter04Application {
                 .build();
     }
 
-    @StepScope
-    @Bean
+    //@StepScope
+    //@Bean
     public Tasklet helloWorldTaskLet(
             @Value("#{jobParameters['name']}") String name,
             @Value("#{jobParameters['fileName']}") String fileName,
