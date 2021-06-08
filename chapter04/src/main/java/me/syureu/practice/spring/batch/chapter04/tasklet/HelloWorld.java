@@ -18,7 +18,6 @@ public class HelloWorld implements Tasklet {
 
         ExecutionContext jobContext = chunkContext.getStepContext()
                 .getStepExecution()
-                .getJobExecution()
                 .getExecutionContext();
 
         jobContext.put("user.name", name);
